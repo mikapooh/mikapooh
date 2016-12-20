@@ -1,0 +1,44 @@
+<?php
+/**
+ * Page template
+ */
+
+get_header(); ?>
+
+    <div class="sub-banner">
+        <div class="bodywrap">
+            <?php if (function_exists('simtiful_breadcrumbs')) simtiful_breadcrumbs(); ?>
+            <div class="search-top">
+                <?php get_search_form(); ?>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="bodywrap main-content-wrap">
+        <div class="row group">
+            <div class="grid12">
+        <?php echo do_shortcode( '[contact-form-7 id="18" title="contact"]' ); ?>
+                <?php
+                    // Start the loop.
+                    while ( have_posts() ) : the_post();
+
+                        // Include the page content template.
+                        // get_template_part( 'content', 'page' );
+
+                        // If comments are open or we have at least one comment, load up the comment template.
+                        if ( comments_open() || get_comments_number() ) :
+                        echo '<div class="comment-wrap">';
+                            comments_template();
+                        echo '</div>';
+                        endif;
+
+
+                    // End the loop.
+                    endwhile;
+                ?>
+            </div>
+        </div>
+    </div> <!-- END bodywrap -->
+
+<?php get_footer(); ?>
